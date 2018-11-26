@@ -5,11 +5,13 @@
   "scripts": {
     "tsc": "tsc",
     "prestart": "node build/startMessage.js",
-    "start": "npm-run-all --parallel security-check open:src",
+    "start": "npm-run-all --parallel security-check open:src test:watch",
     "open:src": "node build/server.js",
     "security-check": "nsp check",
     "localtunnel": "lt --port 3000 --subdomain salmank",
-    "share": "npm-run-all --parallel prestart open:src localtunnel"
+    "share": "npm-run-all --parallel prestart open:src localtunnel",
+    "test": "mocha --reporter progress build/testSetup.js \"public/**/*.test.js\"",
+    "test:watch" : "npm run test -- --watch" 
   },
   "author": "Salman Khan",
   "license": "MIT",
@@ -19,6 +21,7 @@
   },
   "devDependencies": {
     "@types/node": "^10.12.10",
+    "@types/webpack": "^4.4.19",
     "babel-cli": "6.16.0",
     "babel-core": "6.17.0",
     "babel-loader": "6.2.5",
@@ -48,7 +51,7 @@
     "open": "0.0.5",
     "rimraf": "2.5.4",
     "style-loader": "0.13.1",
-    "webpack": "1.13.2",
+    "webpack": "^1.13.2",
     "webpack-dev-middleware": "1.8.4",
     "webpack-hot-middleware": "2.13.0",
     "webpack-md5-hash": "0.0.5"
